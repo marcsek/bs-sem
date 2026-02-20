@@ -1,0 +1,42 @@
+---
+import Section from "./Section.astro";
+---
+
+<Section id="info" title="Informácie">
+	<dl>
+		<dt>Študent:</dt>
+		<dd>Jakub Marček</dd>
+
+		<dt>Názov práce:</dt>
+		<dd>Grafové editory pre prieskumník štruktúr logiky prvého rádu</dd>
+
+		<dt>Školiteľ:</dt>
+		<dd>Mgr. Ján Kľuka, PhD.</dd>
+	</dl>
+
+	<a href="/bp-marcek-zadanie.pdf" target="_blank" rel="noopener">Zadanie </a>
+</Section>
+
+<style>
+	h1 {
+		margin-block: 0.75rem;
+	}
+
+	h4 {
+		margin-block: 0.5rem;
+	}
+	dl {
+		display: grid;
+		grid-template-columns: auto 1fr;
+		gap: 0.5rem 1rem;
+	}
+
+	dt {
+		font-weight: bold;
+		font-style: italic;
+	}
+
+	dd {
+		margin: 0;
+	}
+</style>

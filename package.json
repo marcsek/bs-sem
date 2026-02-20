@@ -9,6 +9,12 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@fontsource-variable/public-sans": "^5.2.7",
+    "@fontsource/geist-sans": "^5.2.5",
     "astro": "^5.17.1"
+  },
+  "devDependencies": {
+    "prettier": "^3.8.1",
+    "prettier-plugin-astro": "^0.14.1"
   }
 }

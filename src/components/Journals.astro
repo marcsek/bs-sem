@@ -1,0 +1,14 @@
+---
+import { getCollection } from "astro:content";
+import Journal from "./Journal.astro";
+import Section from "./Section.astro";
+
+const journals = await getCollection("journals");
+const sorted = journals.sort(
+	(a, b) => b.data.date.getTime() - a.data.date.getTime(),
+);
+---
+
+<Section id="journals" title="Týždenník">
+	{sorted.map((entry) => <Journal journal={entry} />)}
+</Section>
