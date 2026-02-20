@@ -36,3 +36,18 @@ function getWeekRange(date: Date) {
 	<h4>{getWeekRange(journal.data.date)}</h4>
 	<Content />
 </article>
+
+<style>
+	h4 {
+		color: var(--text-primary);
+		margin: 0;
+		border-block: 1px solid var(--grid-line-color);
+		margin-inline: -1rem;
+		padding-inline: 1rem;
+		padding-block: 0.5rem;
+	}
+
+	article {
+		color: var(--text-secondary);
+	}
+</style>

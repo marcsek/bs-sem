@@ -1,4 +1,6 @@
 ---
+import GridLine from "./GridLine.astro";
+
 interface Props {
 	id: string;
 	title: string;
@@ -8,12 +10,28 @@ const { id, title } = Astro.props;
 ---
 
 <section id={id}>
+	<GridLine />
 	<h2>{title}</h2>
-	<slot />
+	<GridLine />
+
+	<div id="section-content">
+		<slot />
+	</div>
 </section>
 
 <style>
 	section {
 		width: 100%;
+	}
+
+	h2 {
+		top: 2rem;
+		position: sticky;
+		margin: 0;
+		padding-block: 0.5rem;
+	}
+
+	#section-content {
+		padding-block: 1rem;
 	}
 </style>

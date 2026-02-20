@@ -26,17 +26,24 @@ import Section from "./Section.astro";
 		margin-block: 0.5rem;
 	}
 	dl {
+		margin: 0;
 		display: grid;
 		grid-template-columns: auto 1fr;
 		gap: 0.5rem 1rem;
+		margin-bottom: 1rem;
 	}
 
 	dt {
-		font-weight: bold;
+		font-weight: 500;
 		font-style: italic;
 	}
 
 	dd {
 		margin: 0;
+	}
+
+	a {
+		color: inherit;
+		color: var(--text-secondary);
 	}
 </style>

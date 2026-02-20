@@ -1,8 +1,16 @@
 ---
 import Welcome from "../components/Welcome.astro";
-import Layout from "../layouts/Layout.astro";
+import Layout from "../layouts/BaseLayout.astro";
 ---
 
 <Layout>
 	<Welcome />
 </Layout>
+
+<style is:global>
+	:root {
+		--grid-line-color: rgba(255, 255, 255, 0.06);
+		--text-primary: oklch(95% 0 0);
+		--text-secondary: oklch(75% 0 0);
+	}
+</style>

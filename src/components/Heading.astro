@@ -1,3 +1,8 @@
+---
+import GridLine from "./GridLine.astro";
+---
+
+<GridLine />
 <div id="heading">
 	<h1>Bakalárska práca</h1>
 	<p>
@@ -9,16 +14,18 @@
 	#heading {
 		display: flex;
 		justify-content: space-between;
-		align-items: flex-end;
+		align-items: center;
 		flex-wrap: wrap;
 
 		width: 100%;
 		gap: 1rem;
+		padding-block: 0.5rem;
 	}
 
 	#heading p {
 		font-size: 0.875rem;
 		margin: 0;
+		color: var(--text-secondary);
 	}
 
 	#heading #name {

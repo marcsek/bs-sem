@@ -1,0 +1,37 @@
+---
+interface Props {
+	title: string;
+	text: string;
+	href?: string;
+}
+
+const { title, text, href } = Astro.props;
+---
+
+<li>
+	<em>{title}</em>,
+	{text && <> {text}</>}
+	{
+		href && (
+			<>
+				{" "}
+				Dostupné z{" "}
+				<a href={href} target="_blank" rel="noopener noreferrer">
+					{href}
+				</a>
+				.
+			</>
+		)
+	}
+</li>
+
+<style>
+	li,
+	a {
+		color: var(--text-secondary);
+	}
+
+	em {
+		color: var(--text-primary);
+	}
+</style>
