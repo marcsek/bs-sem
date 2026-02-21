@@ -1,12 +1,15 @@
 ---
 import type { CollectionEntry } from "astro:content";
 import { render } from "astro:content";
+import PlusSign from "../assets/plus.svg";
+import MinusSign from "../assets/dash.svg";
 
 interface Props {
 	journal: CollectionEntry<"journals">;
+	defaultToggled: boolean;
 }
 
-const { journal } = Astro.props;
+const { journal, defaultToggled } = Astro.props;
 
 const { Content } = await render(journal);
 
@@ -33,21 +36,115 @@ function getWeekRange(date: Date) {
 ---
 
 <article>
-	<h4>{getWeekRange(journal.data.date)}</h4>
-	<Content />
+	<button
+		class={`accordion ${defaultToggled ? "default-active active" : ""}`}
+	>
+		<h4>{getWeekRange(journal.data.date)}</h4>
+		<PlusSign class="indicator plus" aria-hidden="true" />
+		<MinusSign class="indicator minus" aria-hidden="true" />
+	</button>
+	<div class="panel">
+		<Content />
+	</div>
 </article>
 
 <style>
-	h4 {
-		color: var(--text-primary);
-		margin: 0;
-		border-block: 1px solid var(--grid-line-color);
-		margin-inline: -1rem;
-		padding-inline: 1rem;
-		padding-block: 0.5rem;
-	}
-
 	article {
 		color: var(--text-secondary);
 	}
+
+	.accordion h4 {
+		color: var(--text-primary);
+		margin: 0;
+		font-size: 1rem;
+		font-weight: 600;
+		font-style: inherit;
+		font-family: var(--font-family);
+	}
+
+	.accordion .indicator {
+		color: var(--text-tertiary);
+		font-weight: bold;
+		font-size: 1rem;
+		transform: scale(1.2);
+	}
+
+	.accordion {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+
+		cursor: pointer;
+		text-align: left;
+		border: none;
+		outline: none;
+		background-color: unset;
+		padding-inline: 1rem;
+		padding-block: 0.5rem;
+		width: calc(100% + 2rem);
+		border-block: 1px solid var(--grid-line-color);
+		border-bottom-width: 0;
+		margin-inline: -1rem;
+		transition: background-color 0.2s ease;
+	}
+
+	.accordion:hover {
+		background-color: var(--hover-bg);
+	}
+
+	.accordion:not(.active) .indicator.minus {
+		display: none;
+	}
+
+	.accordion.active .indicator.plus {
+		display: none;
+	}
+
+	.accordion.default-active + .panel {
+		max-height: none;
+	}
+
+	article:last-of-type .accordion,
+	.accordion.active {
+		border-bottom-width: 1px;
+	}
+
+	.panel {
+		overflow: hidden;
+		max-height: 0;
+	}
 </style>
+
+<script>
+	const accordions = document.getElementsByClassName("accordion");
+
+	for (const accordion of accordions) {
+		const wasDefaultActive = accordion.classList.contains("default-active");
+
+		const panel = accordion.nextElementSibling as HTMLElement | null;
+
+		if (!panel) break;
+
+		if (wasDefaultActive) {
+			panel.style.maxHeight = panel.scrollHeight + "px";
+		}
+
+		accordion.classList.remove("default-active");
+		panel.style.transition = "max-height 0.2s ease-out";
+	}
+
+	for (const accordion of accordions) {
+		accordion.addEventListener("click", () => {
+			const wasActive = accordion.classList.contains("active");
+
+			accordion.classList.toggle("active");
+
+			const panel = accordion.nextElementSibling as HTMLElement | null;
+
+			if (!panel) return;
+
+			if (wasActive) panel.style.maxHeight = "";
+			else panel.style.maxHeight = panel.scrollHeight + "px";
+		});
+	}
+</script>

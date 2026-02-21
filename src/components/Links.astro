@@ -1,0 +1,59 @@
+---
+import Section from "./Section.astro";
+---
+
+<Section id="links" title="Odkazy">
+	<ul>
+		<li>
+			<a
+				href="https://github.com/marcsek/structure-explorer/tree/graph-editors"
+				target="_blank">Github repozitár</a
+			>
+			<span>Repozitár so samotnou aplikáciou</span>
+		</li>
+		<li aria-hidden="true"><div class="divider"></div></li>
+		<li>
+			<a href="#" target="_blank">Bakalárska práca</a>
+			<span>Aktuálna verzia písomnej časti BP</span>
+		</li>
+	</ul>
+</Section>
+
+<style>
+	ul {
+		display: flex;
+		justify-content: space-evenly;
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		gap: 1rem;
+	}
+
+	.divider {
+		height: calc(100% + 2rem - 1px);
+		margin-block: calc(-1rem + 1px);
+		width: 0.5rem;
+		flex-shrink: 0;
+
+		--pattern-fg: var(--grid-line-color);
+		background-image: repeating-linear-gradient(
+			315deg,
+			var(--pattern-fg) 0,
+			var(--pattern-fg) 1px,
+			transparent 0,
+			transparent 50%
+		);
+		background-size: 10px 10px;
+		border-inline: 1px solid var(--grid-line-color);
+	}
+
+	li {
+		display: flex;
+		flex-direction: column;
+		gap: 0.25rem;
+	}
+
+	span {
+		color: var(--text-tertiary);
+	}
+</style>
