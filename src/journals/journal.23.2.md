@@ -1,5 +1,5 @@
 ---
-title: "My First Journal Entry"
+title: "My First Journal Entry 2"
 date: 2026-02-23
 ---
 
