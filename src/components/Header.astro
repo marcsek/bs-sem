@@ -1,0 +1,70 @@
+<header>
+	<a href="#info">Informácie</a>
+	<a href="#journals">Týždenník</a>
+	<a href="#links">Odkazy</a>
+	<a href="#sources">Zdroje</a>
+</header>
+
+<style>
+	header {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		padding-block: 1rem;
+		position: relative;
+	}
+
+	header a {
+		position: relative;
+		text-decoration: none;
+	}
+
+	header a::before {
+		content: "";
+		position: absolute;
+		display: block;
+		width: 100%;
+		height: 2px;
+		bottom: 0;
+		left: 0;
+		background-color: oklch(40% 0 0);
+		transform: scaleX(0);
+		transform-origin: top left;
+		transition: transform 0.2s ease;
+	}
+
+	header::before,
+	header::after {
+		content: "";
+		display: block;
+		position: absolute;
+		left: calc(-1rem + 1px);
+		height: 0.5rem;
+		width: calc(100% + 2rem - 2px);
+
+		--pattern-fg: var(--grid-line-color);
+
+		background-image: repeating-linear-gradient(
+			315deg,
+			var(--pattern-fg) 0,
+			var(--pattern-fg) 1px,
+			transparent 0,
+			transparent 50%
+		);
+		background-size: 10px 10px;
+	}
+
+	header::before {
+		top: 0;
+		border-bottom: 1px solid var(--grid-line-color);
+	}
+
+	header::after {
+		bottom: 0;
+		border-top: 1px solid var(--grid-line-color);
+	}
+
+	header a:hover::before {
+		transform: scaleX(1);
+	}
+</style>

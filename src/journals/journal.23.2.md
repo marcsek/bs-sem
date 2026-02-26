@@ -1,10 +1,10 @@
 ---
-title: "My First Journal Entry 2"
+title: "Week2"
 date: 2026-02-23
 ---
 
-- Today I started building my Astro journal site.
+- Implementácia prvej verzie **Editora unárnych funkcií**.
 
-- It feels clean and minimal.
+- Dolaďovanie UI Henkinovej-Hintikkovej hry. [[#CE9CC3]](https://github.com/marcsek/structure-explorer/commit/ce9cc33249bc83465b4ee32cdaeba8498c7d8c16)
 
-- Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+- Testovanie a publikovanie nového patchu aplikácie <span class="version">(ver. 0.1.2)</span> a jeho integrácia v aplikácii ***Logic Workbook***.

@@ -5,6 +5,7 @@ import Journals from "./Journals.astro";
 import Sources from "./Sources.astro";
 import Links from "./Links.astro";
 import GridLine from "./GridLine.astro";
+import Header from "./Header.astro";
 ---
 
 <div id="container">
@@ -15,12 +16,7 @@ import GridLine from "./GridLine.astro";
 
 		<GridLine />
 
-		<header>
-			<a href="#info">Informácie</a>
-			<a href="#journals">Týždenník</a>
-			<a href="#links">Odkazy</a>
-			<a href="#sources">Zdroje</a>
-		</header>
+		<Header />
 
 		<div id="content">
 			<Info />
@@ -35,71 +31,35 @@ import GridLine from "./GridLine.astro";
 	a {
 		color: var(--text-secondary);
 	}
+
+	.decorate ul,
+	ul.decorate {
+		list-style: none;
+		padding-left: 1rem;
+	}
+
+	.decorate li {
+		position: relative;
+	}
+
+	.decorate li::before {
+		content: "";
+		position: absolute;
+		left: -18px;
+		top: 3px;
+
+		width: 0.75rem;
+		height: 0.75rem;
+
+		background-color: var(--text-tertiary);
+
+		-webkit-mask: url("/src/assets/chevron-right.svg") no-repeat center /
+			contain;
+		mask: url("/src/assets/chevron-right.svg") no-repeat center / contain;
+	}
 </style>
 
 <style>
-	header {
-		display: flex;
-		flex-wrap: wrap;
-		justify-content: space-between;
-		padding-block: 1rem;
-		position: relative;
-	}
-
-	header a {
-		position: relative;
-		text-decoration: none;
-	}
-
-	header a::before {
-		content: "";
-		position: absolute;
-		display: block;
-		width: 100%;
-		height: 2px;
-		bottom: 0;
-		left: 0;
-		background-color: oklch(40% 0 0);
-		transform: scaleX(0);
-		transform-origin: top left;
-		transition: transform 0.2s ease;
-	}
-
-	header::before,
-	header::after {
-		content: "";
-		display: block;
-		position: absolute;
-		left: calc(-1rem + 1px);
-		height: 0.5rem;
-		width: calc(100% + 2rem - 2px);
-
-		--pattern-fg: var(--grid-line-color);
-
-		background-image: repeating-linear-gradient(
-			315deg,
-			var(--pattern-fg) 0,
-			var(--pattern-fg) 1px,
-			transparent 0,
-			transparent 50%
-		);
-		background-size: 10px 10px;
-	}
-
-	header::before {
-		top: 0;
-		border-bottom: 1px solid var(--grid-line-color);
-	}
-
-	header::after {
-		bottom: 0;
-		border-top: 1px solid var(--grid-line-color);
-	}
-
-	header a:hover::before {
-		transform: scaleX(1);
-	}
-
 	#container {
 		position: relative;
 		height: 100%;
@@ -149,5 +109,16 @@ import GridLine from "./GridLine.astro";
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+	}
+
+	@media (max-width: 575.98px) {
+		#container {
+			padding-inline: 0.75rem;
+		}
+
+		#container::before,
+		#container::after {
+			display: none;
+		}
 	}
 </style>

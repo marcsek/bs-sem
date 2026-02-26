@@ -6,10 +6,11 @@ import MinusSign from "../assets/dash.svg";
 
 interface Props {
 	journal: CollectionEntry<"journals">;
+	weekIdx: number;
 	defaultToggled: boolean;
 }
 
-const { journal, defaultToggled } = Astro.props;
+const { journal, weekIdx, defaultToggled } = Astro.props;
 
 const { Content } = await render(journal);
 
@@ -39,11 +40,12 @@ function getWeekRange(date: Date) {
 	<button
 		class={`accordion ${defaultToggled ? "default-active active" : ""}`}
 	>
-		<h4>{getWeekRange(journal.data.date)}</h4>
+		<h4>Týždeň #{weekIdx}</h4>
+		<span>({getWeekRange(journal.data.date)})</span>
 		<PlusSign class="indicator plus" aria-hidden="true" />
 		<MinusSign class="indicator minus" aria-hidden="true" />
 	</button>
-	<div class="panel">
+	<div class="panel decorate">
 		<Content />
 	</div>
 </article>
@@ -59,20 +61,28 @@ function getWeekRange(date: Date) {
 		font-size: 1rem;
 		font-weight: 600;
 		font-style: inherit;
-		font-family: var(--font-family);
 	}
 
 	.accordion .indicator {
 		color: var(--text-tertiary);
 		font-weight: bold;
-		font-size: 1rem;
 		transform: scale(1.2);
+	}
+
+	.accordion span {
+		color: var(--text-tertiary);
+		margin-right: auto;
+		margin-left: 1rem;
+		font-weight: 500;
+		font-size: 0.875rem;
 	}
 
 	.accordion {
 		display: flex;
 		flex-direction: row;
 		justify-content: space-between;
+		align-items: center;
+		font-family: var(--font-family);
 
 		cursor: pointer;
 		text-align: left;
@@ -113,38 +123,53 @@ function getWeekRange(date: Date) {
 		overflow: hidden;
 		max-height: 0;
 	}
+
+	.panel :global(a) {
+		color: var(--text-tertiary);
+	}
+
+	.panel :global(.version) {
+		color: var(--text-tertiary);
+	}
 </style>
 
 <script>
 	const accordions = document.getElementsByClassName("accordion");
 
-	for (const accordion of accordions) {
-		const wasDefaultActive = accordion.classList.contains("default-active");
+	document.addEventListener("DOMContentLoaded", () => {
+		for (const accordion of accordions) {
+			const wasDefaultActive =
+				accordion.classList.contains("default-active");
+			const panel = accordion.nextElementSibling as HTMLElement | null;
+			if (!panel) break;
 
-		const panel = accordion.nextElementSibling as HTMLElement | null;
+			if (wasDefaultActive) panel.style.maxHeight = "none";
 
-		if (!panel) break;
+			accordion.classList.remove("default-active");
+			panel.style.transition = "max-height 0.2s ease-out";
 
-		if (wasDefaultActive) {
-			panel.style.maxHeight = panel.scrollHeight + "px";
+			panel.addEventListener("transitionend", () => {
+				if (accordion.classList.contains("active"))
+					panel.style.maxHeight = "none";
+			});
 		}
-
-		accordion.classList.remove("default-active");
-		panel.style.transition = "max-height 0.2s ease-out";
-	}
+	});
 
 	for (const accordion of accordions) {
 		accordion.addEventListener("click", () => {
 			const wasActive = accordion.classList.contains("active");
-
-			accordion.classList.toggle("active");
-
 			const panel = accordion.nextElementSibling as HTMLElement | null;
-
 			if (!panel) return;
 
-			if (wasActive) panel.style.maxHeight = "";
-			else panel.style.maxHeight = panel.scrollHeight + "px";
+			if (wasActive) {
+				panel.style.maxHeight = panel.scrollHeight + "px";
+				void panel.offsetHeight;
+				panel.style.maxHeight = "";
+			} else {
+				panel.style.maxHeight = panel.scrollHeight + "px";
+			}
+
+			accordion.classList.toggle("active");
 		});
 	}
 </script>

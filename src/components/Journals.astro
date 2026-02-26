@@ -12,7 +12,11 @@ const sorted = journals.sort(
 <Section id="journals" title="Týždenník">
 	{
 		sorted.map((entry, idx) => (
-			<Journal journal={entry} defaultToggled={idx === 0} />
+			<Journal
+				journal={entry}
+				weekIdx={journals.length - idx}
+				defaultToggled={idx === 0}
+			/>
 		))
 	}
 </Section>

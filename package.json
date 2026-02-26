@@ -6,13 +6,13 @@
 		"dev": "astro dev --host",
 		"build": "astro build",
 		"preview": "astro preview",
-		"astro": "astro"
+		"astro": "astro",
 		"start": "npx serve dist -l 3000"
 	},
 	"dependencies": {
-		"@fontsource-variable/inter": "^5.2.8",
 		"@fontsource-variable/roboto": "^5.2.9",
-		"astro": "^5.17.1"
+		"astro": "^5.17.1",
+		"rehype-external-links": "^3.0.0"
 	},
 	"devDependencies": {
 		"prettier": "^3.8.1",

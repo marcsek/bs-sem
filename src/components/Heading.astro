@@ -4,6 +4,7 @@ import GridLine from "./GridLine.astro";
 
 <GridLine />
 <div id="heading">
+	<span id="submission-text"></span>
 	<h1>Bakalárska práca</h1>
 	<p>
 		<span id="name">Jakub Marček</span> marcek18@uniba.sk
@@ -16,6 +17,7 @@ import GridLine from "./GridLine.astro";
 		justify-content: space-between;
 		align-items: center;
 		flex-wrap: wrap;
+		position: relative;
 
 		width: 100%;
 		gap: 1rem;
@@ -33,8 +35,52 @@ import GridLine from "./GridLine.astro";
 		font-weight: 500;
 	}
 
+	#submission-text {
+		font-size: 0.75rem;
+		font-family: var(--font-family), monospace;
+		color: var(--text-tertiary);
+		text-transform: uppercase;
+		position: absolute;
+		top: -0.875rem;
+		line-height: 1;
+	}
+
 	h1 {
 		margin: 0;
 		font-size: 2.25rem;
 	}
 </style>
+
+<script>
+	const target = new Date("2026-05-17T23:59:59.999").getTime();
+
+	const el = document.getElementById("submission-text");
+
+	function update() {
+		const diff = target - Date.now();
+
+		if (!el) return;
+
+		if (diff <= 0) {
+			el.textContent = "Time's up";
+			clearInterval(interval);
+			return;
+		}
+
+		const days = Math.floor(diff / 86_400_000);
+		const hours = Math.floor(diff / 3_600_000) % 24;
+		const minutes = Math.floor(diff / 60_000) % 60;
+		const seconds = Math.floor(diff / 1_000) % 60;
+		const millis = diff % 1000;
+
+		const pd = (t: number, p: number = 2) => t.toString().padStart(p, "0");
+
+		el.textContent =
+			`D-Day: ${days}d ${pd(hours)}h ${pd(minutes)}m ` +
+			`${pd(seconds)}s ${pd(millis, 3)}ms`;
+	}
+
+	update();
+
+	const interval = setInterval(update, 8);
+</script>
