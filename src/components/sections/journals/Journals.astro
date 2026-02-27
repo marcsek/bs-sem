@@ -1,7 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import Journal from "./Journal.astro";
-import Section from "./Section.astro";
+import Section from "../../Section.astro";
 
 const journals = await getCollection("journals");
 const sorted = journals.sort(

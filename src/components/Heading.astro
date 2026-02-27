@@ -37,7 +37,7 @@ import GridLine from "./GridLine.astro";
 
 	#submission-text {
 		font-size: 0.75rem;
-		font-family: var(--font-family), monospace;
+		font-family: var(--font-family-mono);
 		color: var(--text-tertiary);
 		text-transform: uppercase;
 		position: absolute;
@@ -62,7 +62,7 @@ import GridLine from "./GridLine.astro";
 		if (!el) return;
 
 		if (diff <= 0) {
-			el.textContent = "Time's up";
+			el.textContent = "D-Day: Time's up";
 			clearInterval(interval);
 			return;
 		}

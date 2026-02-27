@@ -1,10 +1,10 @@
 ---
-import Welcome from "../components/Welcome.astro";
+import Main from "../components/Main.astro";
 import Layout from "../layouts/BaseLayout.astro";
 ---
 
 <Layout>
-	<Welcome />
+	<Main />
 </Layout>
 
 <style is:global>
@@ -15,6 +15,7 @@ import Layout from "../layouts/BaseLayout.astro";
 		--text-secondary: oklch(75% 0 0);
 		--text-tertiary: oklch(55% 0 0);
 		--font-family: "Roboto Variable", sans-serif;
+		--font-family-mono: "Roboto Variable", monospace;
 
 		font-display: block;
 		color-scheme: dark;
