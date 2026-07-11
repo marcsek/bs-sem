@@ -57,15 +57,11 @@ import GridLine from "./GridLine.astro";
 	const el = document.getElementById("submission-text");
 
 	function update() {
-		const diff = target - Date.now();
+		let diff = target - Date.now();
+		const pastDeadline = diff <= 0;
+		if (pastDeadline) diff = Date.now() - target;
 
 		if (!el) return;
-
-		if (diff <= 0) {
-			el.textContent = "D-Day: Time's up";
-			clearInterval(interval);
-			return;
-		}
 
 		const days = Math.floor(diff / 86_400_000);
 		const hours = Math.floor(diff / 3_600_000) % 24;
@@ -76,11 +72,11 @@ import GridLine from "./GridLine.astro";
 		const pd = (t: number, p: number = 2) => t.toString().padStart(p, "0");
 
 		el.textContent =
-			`D-Day: ${days}d ${pd(hours)}h ${pd(minutes)}m ` +
-			`${pd(seconds)}s ${pd(millis, 3)}ms`;
+			`D-Day${pastDeadline ? " was" : ""}: ${days}d ${pd(hours)}h ${pd(minutes)}m ` +
+			`${pd(seconds)}s ${pd(millis, 3)}ms${pastDeadline ? " ago" : ""}`;
 	}
 
 	update();
 
-	const interval = setInterval(update, 8);
+	setInterval(update, 8);
 </script>
