@@ -14,7 +14,12 @@ import Section from "../../Section.astro";
 		<dd>Mgr. Ján Kľuka, PhD.</dd>
 	</dl>
 
-	<a href="/bp-marcek-zadanie.pdf" target="_blank" rel="noopener">Zadanie </a>
+	<a
+		href={`${import.meta.env.BASE_URL}/bp-marcek-zadanie.pdf`}
+		target="_blank"
+		rel="noopener"
+		>Zadanie
+	</a>
 </Section>
 
 <style>

@@ -6,14 +6,17 @@ import Section from "../../Section.astro";
 	<ul>
 		<li>
 			<a
-				href="https://github.com/marcsek/structure-explorer/tree/graph-editors"
+				href="https://github.com/marcsek/structure-explorer/tree/feature"
 				target="_blank">GitHub repozitár</a
 			>
 			<span>Repozitár so samotnou aplikáciou</span>
 		</li>
 		<li aria-hidden="true"><div class="divider"></div></li>
 		<li>
-			<a href="/bp-marcek.pdf" target="_blank">Bakalárska práca</a>
+			<a
+				href={`${import.meta.env.BASE_URL}/bp-marcek.pdf`}
+				target="_blank">Bakalárska práca</a
+			>
 			<span>Aktuálna verzia písomnej časti BP</span>
 		</li>
 	</ul>
